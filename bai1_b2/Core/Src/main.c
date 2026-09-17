@@ -29,6 +29,30 @@ int main(void)
     }
 }
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART1)
+    {
+        if (rx_data == '!')
+        {
+            HAL_UART_Transmit(&huart1, string, sizeof(string) - 1, HAL_MAX_DELAY);
+            HAL_UART_Transmit(&huart1, (uint8_t *)": ", 2, HAL_MAX_DELAY);
+            HAL_UART_Transmit(&huart1, rx_buffer, rx_index, HAL_MAX_DELAY);
+            HAL_UART_Transmit(&huart1, (uint8_t *)"\n\r", 2, HAL_MAX_DELAY);
+
+            rx_index = 0;
+        }
+        else
+        {
+            if (rx_index < sizeof(rx_buffer) - 1)
+            {
+                rx_buffer[rx_index++] = rx_data;
+            }
+        }
+
+        HAL_UART_Receive_IT(&huart1, &rx_data, 1);
+    }
+}
 void SystemClock_Config(void)
 {
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -86,39 +110,8 @@ static void MX_GPIO_Init(void)
     __HAL_RCC_GPIOA_CLK_ENABLE();
 }
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-    if (huart->Instance == USART1)
-    {
-        if (rx_data == '!')
-        {
-            HAL_UART_Transmit(&huart1, string, sizeof(string) - 1, HAL_MAX_DELAY);
-            HAL_UART_Transmit(&huart1, (uint8_t *)": ", 2, HAL_MAX_DELAY);
-            HAL_UART_Transmit(&huart1, rx_buffer, rx_index, HAL_MAX_DELAY);
-            HAL_UART_Transmit(&huart1, (uint8_t *)"\n\r", 2, HAL_MAX_DELAY);
 
-            rx_index = 0;
-        }
-        else
-        {
-            if (rx_index < sizeof(rx_buffer) - 1)
-            {
-                rx_buffer[rx_index++] = rx_data;
-            }
-        }
 
-        HAL_UART_Receive_IT(&huart1, &rx_data, 1);
-    }
-}
-
-void Error_Handler(void)
-{
-    __disable_irq();
-
-    while (1)
-    {
-    }
-}
 void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 {
     GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -140,6 +133,14 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 
         HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
         HAL_NVIC_EnableIRQ(USART1_IRQn);
+    }
+}
+void Error_Handler(void)
+{
+    __disable_irq();
+
+    while (1)
+    {
     }
 }
 void USART1_IRQHandler(void)

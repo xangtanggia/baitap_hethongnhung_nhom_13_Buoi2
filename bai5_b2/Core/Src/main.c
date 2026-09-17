@@ -23,52 +23,6 @@ static void MX_USART1_UART_Init(void);
 void process_command(void);
 void set_pwm(uint8_t percent);
 void uart_send_string(char *str);
-void USART1_IRQHandler(void)
-{
-    HAL_UART_IRQHandler(&huart1);
-}
-void SysTick_Handler(void)
-{
-    HAL_IncTick();
-    HAL_SYSTICK_IRQHandler();
-}
-void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
-{
-    if (htim->Instance == TIM2)
-    {
-        __HAL_RCC_TIM2_CLK_ENABLE();
-    }
-}
-void HAL_UART_MspInit(UART_HandleTypeDef *huart)
-{
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-    if (huart->Instance == USART1)
-    {
-        __HAL_RCC_USART1_CLK_ENABLE();
-        __HAL_RCC_GPIOA_CLK_ENABLE();
-
-        GPIO_InitStruct.Pin = GPIO_PIN_9;
-        GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-        GPIO_InitStruct.Pin = GPIO_PIN_10;
-        GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-        GPIO_InitStruct.Pull = GPIO_NOPULL;
-        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-        HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
-        HAL_NVIC_EnableIRQ(USART1_IRQn);
-    }
-}
-void HAL_MspInit(void)
-{
-    __HAL_RCC_AFIO_CLK_ENABLE();
-    __HAL_RCC_PWR_CLK_ENABLE();
-
-    __HAL_AFIO_REMAP_SWJ_NOJTAG();
-}
 int main(void)
 {
     HAL_Init();
@@ -90,20 +44,8 @@ int main(void)
     }
 }
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(htim->Instance==TIM2)
-  {
-   
-    __HAL_RCC_GPIOA_CLK_ENABLE();
- 
-    GPIO_InitStruct.Pin = GPIO_PIN_0;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-  }
-}
+
+
 
 void set_pwm(uint8_t percent)
 {
@@ -112,7 +54,7 @@ void set_pwm(uint8_t percent)
     if (percent > 100)
         percent = 100;
 
-    compare = (htim2.Init.Period  * percent) / 100;
+    compare = ((htim2.Init.Period+1)  * percent) / 100;
 
     __HAL_TIM_SET_COMPARE(
         &htim2,
@@ -235,6 +177,60 @@ void process_command(void)
 
 
 
+void HAL_MspInit(void)
+{
+    __HAL_RCC_AFIO_CLK_ENABLE();
+    __HAL_RCC_PWR_CLK_ENABLE();
+
+    __HAL_AFIO_REMAP_SWJ_NOJTAG();
+}
+void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
+{
+    if (htim->Instance == TIM2)
+    {
+        __HAL_RCC_TIM2_CLK_ENABLE();
+    }
+}
+void HAL_UART_MspInit(UART_HandleTypeDef *huart)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    if (huart->Instance == USART1)
+    {
+        __HAL_RCC_USART1_CLK_ENABLE();
+        __HAL_RCC_GPIOA_CLK_ENABLE();
+
+        GPIO_InitStruct.Pin = GPIO_PIN_9;
+        GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+        GPIO_InitStruct.Pin = GPIO_PIN_10;
+        GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+        HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
+        HAL_NVIC_EnableIRQ(USART1_IRQn);
+    }
+}
+
+
+
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  if(htim->Instance==TIM2)
+  {
+   
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+ 
+    GPIO_InitStruct.Pin = GPIO_PIN_0;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  }
+}
 static void MX_TIM2_Init(void)
 {
     TIM_OC_InitTypeDef sConfigOC = {0};
@@ -292,7 +288,7 @@ static void MX_GPIO_Init(void)
 }
 
 
-\
+
 void SystemClock_Config(void)
 {
    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -333,4 +329,13 @@ void Error_Handler(void)
     while (1)
     {
     }
+}
+void USART1_IRQHandler(void)
+{
+    HAL_UART_IRQHandler(&huart1);
+}
+void SysTick_Handler(void)
+{
+    HAL_IncTick();
+    HAL_SYSTICK_IRQHandler();
 }

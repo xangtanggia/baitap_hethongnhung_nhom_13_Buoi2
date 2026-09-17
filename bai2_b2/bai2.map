@@ -2520,23 +2520,23 @@ LOAD /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-no
                 0x0800014c       0x28 /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.2.1/thumb/v7-m/nofp/crtbegin.o
  .text.frame_dummy
                 0x08000174       0x24 /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.2.1/thumb/v7-m/nofp/crtbegin.o
- .text.SysTick_Handler
-                0x08000198       0x10 Core/Src/main.o
-                0x08000198                SysTick_Handler
+ .text.main     0x08000198       0x14 Core/Src/main.o
+                0x08000198                main
  .text.HAL_SYSTICK_Callback
-                0x080001a8       0x80 Core/Src/main.o
-                0x080001a8                HAL_SYSTICK_Callback
- .text.main     0x08000228       0x14 Core/Src/main.o
-                0x08000228                main
+                0x080001ac       0x80 Core/Src/main.o
+                0x080001ac                HAL_SYSTICK_Callback
  .text.SystemClock_Config
-                0x0800023c       0x8a Core/Src/main.o
-                0x0800023c                SystemClock_Config
- *fill*         0x080002c6        0x2 
+                0x0800022c       0x8a Core/Src/main.o
+                0x0800022c                SystemClock_Config
+ *fill*         0x080002b6        0x2 
  .text.MX_GPIO_Init
-                0x080002c8       0x7c Core/Src/main.o
+                0x080002b8       0x7c Core/Src/main.o
  .text.Error_Handler
-                0x08000344        0xc Core/Src/main.o
-                0x08000344                Error_Handler
+                0x08000334        0xc Core/Src/main.o
+                0x08000334                Error_Handler
+ .text.SysTick_Handler
+                0x08000340       0x10 Core/Src/main.o
+                0x08000340                SysTick_Handler
  .text.SystemInit
                 0x08000350        0xc Core/Src/system_stm32f1xx.o
                 0x08000350                SystemInit
@@ -2945,29 +2945,29 @@ LOAD /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-no
  .debug_macro   0x00018055      0x32d Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
  .debug_macro   0x00018382      0x2d4 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
 
-.debug_line     0x00000000     0x3fc2
- .debug_line    0x00000000      0x84b Core/Src/main.o
- .debug_line    0x0000084b      0x7e2 Core/Src/system_stm32f1xx.o
- .debug_line    0x0000102d      0xa16 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
- .debug_line    0x00001a43      0xbef Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
- .debug_line    0x00002632      0xa4c Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
- .debug_line    0x0000307e      0xecc Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
- .debug_line    0x00003f4a       0x78 Startup/startup_stm32f103xb.o
+.debug_line     0x00000000     0x3fc5
+ .debug_line    0x00000000      0x84e Core/Src/main.o
+ .debug_line    0x0000084e      0x7e2 Core/Src/system_stm32f1xx.o
+ .debug_line    0x00001030      0xa16 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_line    0x00001a46      0xbef Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_line    0x00002635      0xa4c Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_line    0x00003081      0xecc Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_line    0x00003f4d       0x78 Startup/startup_stm32f103xb.o
 
-.debug_str      0x00000000    0x97513
- .debug_str     0x00000000    0x97513 Core/Src/main.o
-                              0x969a6 (size before relaxing)
- .debug_str     0x00097513        0x0 Core/Src/system_stm32f1xx.o
+.debug_str      0x00000000    0x97532
+ .debug_str     0x00000000    0x97532 Core/Src/main.o
+                              0x969a3 (size before relaxing)
+ .debug_str     0x00097532        0x0 Core/Src/system_stm32f1xx.o
                               0x96744 (size before relaxing)
- .debug_str     0x00097513        0x0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_str     0x00097532        0x0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
                               0x96e77 (size before relaxing)
- .debug_str     0x00097513        0x0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_str     0x00097532        0x0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
                               0x96dc3 (size before relaxing)
- .debug_str     0x00097513        0x0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_str     0x00097532        0x0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
                               0x96aca (size before relaxing)
- .debug_str     0x00097513        0x0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_str     0x00097532        0x0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
                               0x96b73 (size before relaxing)
- .debug_str     0x00097513        0x0 Startup/startup_stm32f103xb.o
+ .debug_str     0x00097532        0x0 Startup/startup_stm32f103xb.o
                                  0x5c (size before relaxing)
 
 .comment        0x00000000       0x45

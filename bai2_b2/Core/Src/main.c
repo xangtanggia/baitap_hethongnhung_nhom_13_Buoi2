@@ -5,41 +5,13 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 
-void SysTick_Handler(void)
-{
-    HAL_IncTick();
-    HAL_SYSTICK_IRQHandler();
-}
 
 
 uint32_t cnt_led1 = 0;
 uint32_t cnt_led2 = 0;
 uint32_t cnt_led3 = 0;
 
-void HAL_SYSTICK_Callback(void)
-{
-    cnt_led1++;
-    cnt_led2++;
-    cnt_led3++;
 
-    if (cnt_led1 >= 5000)
-    {
-        cnt_led1 = 0;
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
-    }
-
-    if (cnt_led2 >= 500)
-    {
-        cnt_led2 = 0;
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_2);
-    }
-
-    if (cnt_led3 >= 50)
-    {
-        cnt_led3 = 0;
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_3);
-    }
-}
 int main(void)
 {
 
@@ -56,6 +28,30 @@ int main(void)
 }
 
 
+void HAL_SYSTICK_Callback(void)
+{
+    cnt_led1++;
+    cnt_led2++;
+    cnt_led3++;
+
+    if (cnt_led1 >= 5000)
+    {
+        cnt_led1 = 0;
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+    }
+
+    if (cnt_led2 >= 500)
+    {
+        cnt_led2 = 0;
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
+    }
+
+    if (cnt_led3 >= 50)
+    {
+        cnt_led3 = 0;
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_2);
+    }
+}
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -97,10 +93,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PA1 PA2 PA3 */
-  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -118,4 +114,10 @@ void Error_Handler(void)
   }
 
 }
+void SysTick_Handler(void)
+{
+    HAL_IncTick();
+    HAL_SYSTICK_IRQHandler();
+}
+
 

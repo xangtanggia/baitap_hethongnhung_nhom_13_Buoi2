@@ -2446,22 +2446,22 @@ LOAD /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-no
                 0x08000184       0x24 /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.2.1/thumb/v7-m/nofp/crtbegin.o
  .text.main     0x080001a8       0xb0 Core/Src/main.o
                 0x080001a8                main
- .text.SysTick_Handler
-                0x08000258        0xc Core/Src/main.o
-                0x08000258                SysTick_Handler
  .text.SystemClock_Config
-                0x08000264       0xa0 Core/Src/main.o
-                0x08000264                SystemClock_Config
+                0x08000258       0xa0 Core/Src/main.o
+                0x08000258                SystemClock_Config
  .text.MX_ADC1_Init
-                0x08000304       0x7c Core/Src/main.o
+                0x080002f8       0x7c Core/Src/main.o
  .text.MX_USART1_UART_Init
-                0x08000380       0x54 Core/Src/main.o
+                0x08000374       0x54 Core/Src/main.o
  .text.HAL_ADC_MspInit
-                0x080003d4       0x78 Core/Src/main.o
-                0x080003d4                HAL_ADC_MspInit
+                0x080003c8       0x78 Core/Src/main.o
+                0x080003c8                HAL_ADC_MspInit
  .text.HAL_UART_MspInit
-                0x0800044c       0x98 Core/Src/main.o
-                0x0800044c                HAL_UART_MspInit
+                0x08000440       0x98 Core/Src/main.o
+                0x08000440                HAL_UART_MspInit
+ .text.SysTick_Handler
+                0x080004d8        0xc Core/Src/main.o
+                0x080004d8                SysTick_Handler
  .text.Error_Handler
                 0x080004e4        0xc Core/Src/main.o
                 0x080004e4                Error_Handler
@@ -2943,18 +2943,18 @@ LOAD /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-no
 LOAD /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libm.a
 LOAD /opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.2.1/thumb/v7-m/nofp/libgcc.a
 
-.debug_info     0x00000000     0x7874
- .debug_info    0x00000000      0xdc9 Core/Src/main.o
- .debug_info    0x00000dc9      0x227 Core/Src/system_stm32f1xx.o
- .debug_info    0x00000ff0      0x709 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
- .debug_info    0x000016f9      0xc55 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
- .debug_info    0x0000234e      0xa15 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.o
- .debug_info    0x00002d63      0xa8c Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
- .debug_info    0x000037ef      0x5b0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
- .debug_info    0x00003d9f      0x7ee Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
- .debug_info    0x0000458d      0x3c5 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
- .debug_info    0x00004952     0x2ef2 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
- .debug_info    0x00007844       0x30 Startup/startup_stm32f103xb.o
+.debug_info     0x00000000     0x7875
+ .debug_info    0x00000000      0xdca Core/Src/main.o
+ .debug_info    0x00000dca      0x227 Core/Src/system_stm32f1xx.o
+ .debug_info    0x00000ff1      0x709 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_info    0x000016fa      0xc55 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
+ .debug_info    0x0000234f      0xa15 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.o
+ .debug_info    0x00002d64      0xa8c Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_info    0x000037f0      0x5b0 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_info    0x00003da0      0x7ee Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_info    0x0000458e      0x3c5 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
+ .debug_info    0x00004953     0x2ef2 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
+ .debug_info    0x00007845       0x30 Startup/startup_stm32f103xb.o
 
 .debug_abbrev   0x00000000     0x16ba
  .debug_abbrev  0x00000000      0x2bd Core/Src/main.o

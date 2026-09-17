@@ -61,10 +61,7 @@ int main(void)
     }
 
 }
-void SysTick_Handler(void)
-{
-    HAL_IncTick();
-}
+
 
 void SystemClock_Config(void)
 {
@@ -260,7 +257,10 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
         );
     }
 }
-
+void SysTick_Handler(void)
+{
+    HAL_IncTick();
+}
 void Error_Handler(void)
 {
     __disable_irq();
